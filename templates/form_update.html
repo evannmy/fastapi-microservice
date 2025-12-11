@@ -3,17 +3,18 @@
   <div class="col-md-8">
     <div class="card border-warning">
       <div class="card-header bg-warning">
-        <i class="fas fa-edit"></i> Edit Data ID: <b>{{ row.id }}</b> di Server
-        <b>{{ ms }}</b>
+        Edit ID: <b>{{ row.id }}</b> (DB: {% if current_db == 'dba' %}DB-A{%
+        else %}DB-B{% endif %})
       </div>
       <div class="card-body">
         <form action="/update/save" method="POST">
           <input type="hidden" name="ms" value="{{ ms }}" />
           <input type="hidden" name="id" value="{{ row.id }}" />
+          <input type="hidden" name="db_name" value="{{ current_db }}" />
 
           <div class="form-group">
-            <label>Car Name <span class="text-danger">*</span></label>
-            <input
+            <label>Car Name</label
+            ><input
               type="text"
               name="carname"
               value="{{ row.carname }}"
@@ -22,8 +23,8 @@
             />
           </div>
           <div class="form-group">
-            <label>Car Brand <span class="text-danger">*</span></label>
-            <input
+            <label>Car Brand</label
+            ><input
               type="text"
               name="carbrand"
               value="{{ row.carbrand }}"
@@ -32,9 +33,9 @@
             />
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Model <span class="text-danger">*</span></label>
-              <input
+            <div class="col">
+              <label>Model</label
+              ><input
                 type="text"
                 name="carmodel"
                 value="{{ row.carmodel }}"
@@ -42,9 +43,9 @@
                 required
               />
             </div>
-            <div class="form-group col-md-6">
-              <label>Price <span class="text-danger">*</span></label>
-              <input
+            <div class="col">
+              <label>Price</label
+              ><input
                 type="text"
                 name="carprice"
                 value="{{ row.carprice }}"
@@ -56,17 +57,17 @@
           <div class="form-group">
             <label
               >Description <small class="text-muted">(Opsional)</small></label
-            >
-            <!-- Atribut 'required' dihapus disini -->
-            <textarea name="description" class="form-control">
+            ><textarea name="description" class="form-control">
 {{ row.description }}</textarea
             >
           </div>
 
           <button type="submit" class="btn btn-warning btn-block">
-            Update Data
+            Update
           </button>
-          <a href="/update/{{ ms }}" class="btn btn-secondary btn-block"
+          <a
+            href="/update/{{ ms }}?db_name={{ current_db }}"
+            class="btn btn-secondary btn-block"
             >Batal</a
           >
         </form>

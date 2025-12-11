@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/Users/tsukuyomi/University/smt-7/pabw/fastapi-microservice/venv"
+setenv VIRTUAL_ENV "/Users/tsukuyomi/University/smt-7/pabw/tugas/fastapi-microservice-2/venv"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"

@@ -1,13 +1,41 @@
 {% extends "base.html" %} {% block content %}
 <div class="row justify-content-center">
   <div class="col-md-8">
-    <div class="card">
-      <div class="card-header bg-dark text-white">
-        <i class="fas fa-plus-circle"></i> Tambah Data ke <b>{{ ms }}</b>
+    <!-- TOMBOL SWITCH DB -->
+    {% if ms == 'MS2' or ms == 'MS3' %}
+    <div class="d-flex justify-content-end mb-2">
+      <span class="mr-2 align-self-center text-muted">Target Database:</span>
+      <div class="btn-group btn-group-sm">
+        <a
+          href="/create/{{ ms }}?db_name=dba"
+          class="btn btn-outline-success {% if current_db == 'dba' %}active{% endif %}"
+        >
+          <b>DB-A</b>
+        </a>
+        <a
+          href="/create/{{ ms }}?db_name=dbb"
+          class="btn btn-outline-primary {% if current_db == 'dbb' %}active{% endif %}"
+        >
+          <b>DB-B</b>
+        </a>
       </div>
+    </div>
+    {% endif %}
+
+    <div class="card shadow">
+      <div
+        class="card-header text-white {% if current_db == 'dbb' %}bg-primary{% else %}bg-success{% endif %}"
+      >
+        <i class="fas fa-plus-circle"></i> Tambah Data ke <b>{{ ms }}</b>
+        <span class="float-right badge badge-light text-dark">
+          Target: {% if current_db == 'dba' %}DB-A{% else %}DB-B{% endif %}
+        </span>
+      </div>
+
       <div class="card-body">
         <form action="/create/save" method="POST">
           <input type="hidden" name="ms" value="{{ ms }}" />
+          <input type="hidden" name="db_name" value="{{ current_db }}" />
 
           <div class="form-group">
             <label>Car Name <span class="text-danger">*</span></label>
@@ -33,7 +61,7 @@
 
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label>Car Model <span class="text-danger">*</span></label>
+              <label>Model <span class="text-danger">*</span></label>
               <input
                 type="text"
                 name="carmodel"
@@ -43,7 +71,7 @@
               />
             </div>
             <div class="form-group col-md-6">
-              <label>Car Price <span class="text-danger">*</span></label>
+              <label>Price <span class="text-danger">*</span></label>
               <input
                 type="text"
                 name="carprice"
@@ -58,7 +86,6 @@
             <label
               >Description <small class="text-muted">(Opsional)</small></label
             >
-            <!-- Atribut 'required' dihapus disini -->
             <textarea
               name="description"
               class="form-control"
@@ -67,10 +94,19 @@
           </div>
 
           <hr />
-          <button type="submit" class="btn btn-success btn-block">
-            <i class="fas fa-save"></i> Simpan ke Server {{ ms }}
+          <button
+            type="submit"
+            class="btn {% if current_db == 'dbb' %}btn-primary{% else %}btn-success{% endif %} btn-block"
+          >
+            <i class="fas fa-save"></i> Simpan ke {% if current_db == 'dba'
+            %}DB-A{% else %}DB-B{% endif %}
           </button>
-          <a href="/menu/{{ ms }}" class="btn btn-secondary btn-block">Batal</a>
+
+          <a
+            href="/read/{{ ms }}?db_name={{ current_db }}"
+            class="btn btn-secondary btn-block"
+            >Batal</a
+          >
         </form>
       </div>
     </div>
