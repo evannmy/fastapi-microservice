@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block content %}
+<div class="alert alert-warning border-warning">
+  <i class="fas fa-info-circle"></i> <strong>Mode Update:</strong> Silakan pilih
+  tombol <b>Edit</b> pada data yang ingin diubah di server <b>{{ ms }}</b>.
+</div>
+
+<div class="card">
+  <div class="card-header bg-warning">
+    <b>Daftar Mobil ({{ ms }})</b>
+  </div>
+  <table class="table table-bordered mb-0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th class="text-center" width="150">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row.id }}</td>
+        <td>{{ row.carname }}</td>
+        <td>{{ row.carbrand }}</td>
+        <td>{{ row.carprice }}</td>
+        <td class="text-center">
+          <a
+            href="/update/{{ ms }}/{{ row.id }}"
+            class="btn btn-warning btn-sm btn-block"
+          >
+            <i class="fas fa-pencil-alt"></i> Edit
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5" class="text-center">Tidak ada data.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

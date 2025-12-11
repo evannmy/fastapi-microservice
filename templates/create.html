@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-dark text-white">
+        <i class="fas fa-plus-circle"></i> Tambah Data ke <b>{{ ms }}</b>
+      </div>
+      <div class="card-body">
+        <form action="/create/save" method="POST">
+          <input type="hidden" name="ms" value="{{ ms }}" />
+
+          <div class="form-group">
+            <label>Car Name <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              name="carname"
+              class="form-control"
+              placeholder="Contoh: Avanza"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Car Brand <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              name="carbrand"
+              class="form-control"
+              placeholder="Contoh: Toyota"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Car Model <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                name="carmodel"
+                class="form-control"
+                placeholder="Contoh: 2022"
+                required
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label>Car Price <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                name="carprice"
+                class="form-control"
+                placeholder="Contoh: 250000000"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label
+              >Description <small class="text-muted">(Opsional)</small></label
+            >
+            <!-- Atribut 'required' dihapus disini -->
+            <textarea
+              name="description"
+              class="form-control"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <hr />
+          <button type="submit" class="btn btn-success btn-block">
+            <i class="fas fa-save"></i> Simpan ke Server {{ ms }}
+          </button>
+          <a href="/menu/{{ ms }}" class="btn btn-secondary btn-block">Batal</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

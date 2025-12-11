@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card border-warning">
+      <div class="card-header bg-warning">
+        <i class="fas fa-edit"></i> Edit Data ID: <b>{{ row.id }}</b> di Server
+        <b>{{ ms }}</b>
+      </div>
+      <div class="card-body">
+        <form action="/update/save" method="POST">
+          <input type="hidden" name="ms" value="{{ ms }}" />
+          <input type="hidden" name="id" value="{{ row.id }}" />
+
+          <div class="form-group">
+            <label>Car Name <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              name="carname"
+              value="{{ row.carname }}"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Car Brand <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              name="carbrand"
+              value="{{ row.carbrand }}"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Model <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                name="carmodel"
+                value="{{ row.carmodel }}"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label>Price <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                name="carprice"
+                value="{{ row.carprice }}"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label
+              >Description <small class="text-muted">(Opsional)</small></label
+            >
+            <!-- Atribut 'required' dihapus disini -->
+            <textarea name="description" class="form-control">
+{{ row.description }}</textarea
+            >
+          </div>
+
+          <button type="submit" class="btn btn-warning btn-block">
+            Update Data
+          </button>
+          <a href="/update/{{ ms }}" class="btn btn-secondary btn-block"
+            >Batal</a
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

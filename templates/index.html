@@ -1,0 +1,104 @@
+{% extends "base.html" %} {% block content %}
+<div class="jumbotron text-center bg-white border">
+  <h1 class="display-4">Microservices Dashboard</h1>
+  <p class="lead text-muted">Status Server dimuat secara <i>real-time</i>.</p>
+</div>
+
+<!-- Tampilkan Error Message jika ada (misal dipaksa masuk saat offline) -->
+{% if error_message %}
+<div class="alert alert-danger text-center">
+  <i class="fas fa-exclamation-triangle"></i> {{ error_message }}
+</div>
+{% endif %}
+
+<!-- SITE A -->
+<div class="row justify-content-center mb-4">
+  <div class="col-md-10">
+    <h5 class="text-success border-bottom pb-2">
+      <i class="fas fa-server"></i> Site A (Database A)
+    </h5>
+    <div class="row">
+      <!-- MS1 -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-success">
+          <div class="card-body text-center">
+            <h3 class="card-title text-success">MS1</h3>
+            <p class="card-text">Primary Service (Master)</p>
+
+            <!-- LOGIKA PENGECEKAN STATUS -->
+            {% if status['MS1'] %}
+            <span class="badge badge-success mb-3">● ONLINE</span>
+            <a href="/menu/MS1" class="btn btn-success btn-lg btn-block shadow">
+              Masuk ke MS1 <i class="fas fa-arrow-right"></i>
+            </a>
+            {% else %}
+            <span class="badge badge-danger mb-3">● OFFLINE</span>
+            <button class="btn btn-secondary btn-lg btn-block" disabled>
+              <i class="fas fa-ban"></i> Tidak Dapat Diakses
+            </button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <!-- MS2 -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-success">
+          <div class="card-body text-center">
+            <h3 class="card-title text-success">MS2</h3>
+            <p class="card-text">Secondary Service</p>
+
+            <!-- LOGIKA PENGECEKAN STATUS -->
+            {% if status['MS2'] %}
+            <span class="badge badge-success mb-3">● ONLINE</span>
+            <a
+              href="/menu/MS2"
+              class="btn btn-outline-success btn-lg btn-block shadow-sm"
+            >
+              Masuk ke MS2 <i class="fas fa-arrow-right"></i>
+            </a>
+            {% else %}
+            <span class="badge badge-danger mb-3">● OFFLINE</span>
+            <button class="btn btn-secondary btn-lg btn-block" disabled>
+              <i class="fas fa-ban"></i> Tidak Dapat Diakses
+            </button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SITE B -->
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <h5 class="text-primary border-bottom pb-2">
+      <i class="fas fa-server"></i> Site B (Database B)
+    </h5>
+    <div class="row">
+      <!-- MS3 -->
+      <div class="col-md-12">
+        <div class="card h-100 shadow-sm border-primary">
+          <div class="card-body text-center">
+            <h3 class="card-title text-primary">MS3</h3>
+            <p class="card-text">External Service</p>
+
+            <!-- LOGIKA PENGECEKAN STATUS -->
+            {% if status['MS3'] %}
+            <span class="badge badge-success mb-3">● ONLINE</span>
+            <a href="/menu/MS3" class="btn btn-primary btn-lg btn-block shadow">
+              Masuk ke MS3 <i class="fas fa-arrow-right"></i>
+            </a>
+            {% else %}
+            <span class="badge badge-danger mb-3">● OFFLINE</span>
+            <button class="btn btn-secondary btn-lg btn-block" disabled>
+              <i class="fas fa-ban"></i> Tidak Dapat Diakses
+            </button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

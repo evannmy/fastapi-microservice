@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block content %}
+<div class="alert alert-danger border-danger">
+  <i class="fas fa-exclamation-triangle"></i> <strong>Mode Hapus:</strong> Data
+  yang dihapus dari server <b>{{ ms }}</b> tidak dapat dikembalikan.
+</div>
+
+<div class="card">
+  <div class="card-header bg-danger text-white">
+    <b>Daftar Mobil ({{ ms }})</b>
+  </div>
+  <table class="table table-bordered mb-0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th class="text-center" width="150">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row.id }}</td>
+        <td>{{ row.carname }}</td>
+        <td>{{ row.carbrand }}</td>
+        <td>{{ row.carprice }}</td>
+        <td class="text-center">
+          <a
+            href="/delete/{{ ms }}/{{ row.id }}"
+            class="btn btn-danger btn-sm btn-block"
+            onclick="return confirm('Apakah Anda YAKIN ingin menghapus {{ row.carname }}?');"
+          >
+            <i class="fas fa-trash"></i> Hapus
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5" class="text-center">Tidak ada data.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
